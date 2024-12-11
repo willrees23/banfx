@@ -18,7 +18,10 @@ public class BanFX extends JavaPlugin {
 
         if (MinecraftVersion.isNew()) {
             banEffector = new BanEffectorV1_13();
-        } else banEffector = new CommonBanEffector();
+        } else {
+            getLogger().severe("Unsupported version!");
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
 
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new TestEv(), this);

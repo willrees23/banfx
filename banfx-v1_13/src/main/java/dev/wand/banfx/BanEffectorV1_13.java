@@ -1,5 +1,6 @@
 package dev.wand.banfx;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 public class BanEffectorV1_13 implements BanEffector{
@@ -17,6 +18,6 @@ public class BanEffectorV1_13 implements BanEffector{
 
     @Override
     public void log() {
-
+        Bukkit.getLogger().info("Ban effector for 1.13!");
     }
 }
