@@ -1,0 +1,4 @@
+name: BanFX
+main: dev.wand.banfx.BanFX
+version: ${project.version}
+description: Make banning stylish!
