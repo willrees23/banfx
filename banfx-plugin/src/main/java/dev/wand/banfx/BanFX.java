@@ -47,10 +47,6 @@ public class BanFX extends JavaPlugin {
         getLogger().info("BanFX has been disabled!");
     }
 
-    public static void affect(Player player, BanEffectType type) {
-        banEffector.applyEffect(instance, player.getLocation(), type);
-    }
-
     public static void affect(Player player, BanEffectType type, Runnable callback) {
         banEffector.applyEffect(instance, player.getLocation(), type, callback);
     }

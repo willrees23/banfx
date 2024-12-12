@@ -51,9 +51,10 @@ public class CommandEvent implements Listener {
 
         event.getPlayer().sendMessage("Player will be punished...");
 
+        // apply effect
+        // and since we are cancelling the event above, use the callback to re-run what the player was trying to do
         BanFX.affect(player, BanEffectType.MINEPLEX_GWEN, () -> {
             player.performCommand(commandNoSlash);
         });
-
     }
 }
