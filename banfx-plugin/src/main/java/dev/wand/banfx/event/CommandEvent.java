@@ -38,6 +38,8 @@ public class CommandEvent implements Listener {
         }
         if (!isCommand) return;
 
+        BanFX.getPlayerQueue().add(event.getPlayer());
+
         // get target player (argument 1)
         String[] args = event.getMessage().split(" ");
         if (args.length < 2) {
@@ -55,6 +57,7 @@ public class CommandEvent implements Listener {
         // and since we are cancelling the event above, use the callback to re-run what the player was trying to do
         BanFX.affect(player, BanEffectType.MINEPLEX_GWEN, () -> {
             player.performCommand(commandNoSlash);
+            BanFX.getPlayerQueue().remove(player);
         });
     }
 }
