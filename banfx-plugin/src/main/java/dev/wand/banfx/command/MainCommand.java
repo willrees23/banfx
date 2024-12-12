@@ -5,41 +5,41 @@ import dev.wand.banfx.BanEffectType;
 import dev.wand.banfx.BanFX;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
 
 import java.util.List;
 
-public class MainCommand implements TabExecutor {
+public class MainCommand implements BanFXCommand {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage("Usage: /banfx <reload|list|set>");
+            sendHelp(sender);
             return true;
         }
         switch (args[0]) {
             case "reload" -> {
                 BanFX.getInstance().reloadConfig();
-                sender.sendMessage("Reloaded!");
+                sendMessage(sender, "&aConfiguration file reloaded!");
             }
             case "set" -> {
-                if (args.length < 2) {
-                    sender.sendMessage("Usage: /banfx set <punishType> <effect>");
-                    sender.sendMessage("Example: /banfx set * zeus");
-                    sender.sendMessage("Example: /banfx set ban zeus");
+                if (args.length < 3) {
+                    sendSetHelp(sender);
                     return true;
                 }
                 String punishType = args[1];
+                try {
+                    BanEffectType.valueOf(args[2].toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    sendAvailableEffects(sender);
+                    return true;
+                }
                 BanEffectType effectType = BanEffectType.valueOf(args[2].toUpperCase());
                 BanFX.getBanEffectManager().setEffect(punishType, effectType);
-                sender.sendMessage("Effect set!");
+                sendMessage(sender, "&aEffect for &7" + punishType + " &aset to &7" + effectType.getDisplayName());
             }
             case "list" -> {
-                sender.sendMessage("Available effects:");
-                for (BanEffectType effect : BanEffectType.values()) {
-                    sender.sendMessage("- " + effect.getDisplayName());
-                }
+                sendAvailableEffects(sender);
             }
-            default -> sender.sendMessage("Usage: /banfx <reload|list|set>");
+            default -> sendHelp(sender);
         }
         return true;
     }
