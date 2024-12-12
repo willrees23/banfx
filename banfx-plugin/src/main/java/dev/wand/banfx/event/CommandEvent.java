@@ -28,17 +28,17 @@ public class CommandEvent implements Listener {
                 "tban"
         };
 
+        String punishType = commandNoSlash.split(" ")[0];
+
         // check if command is in the list
         boolean isCommand = false;
         for (String command : commands) {
-            if (commandNoSlash.startsWith(command)) {
+            if (punishType.equalsIgnoreCase(command)) {
                 isCommand = true;
                 break;
             }
         }
         if (!isCommand) return;
-
-        BanFX.getPlayerQueue().add(event.getPlayer());
 
         // get target player (argument 1)
         String[] args = event.getMessage().split(" ");
@@ -50,14 +50,14 @@ public class CommandEvent implements Listener {
         if (player == null) return;
 
         event.setCancelled(true);
-
         event.getPlayer().sendMessage("Player will be punished...");
+        BanFX.getPlayerQueue().add(player);
 
         // apply effect
         // and since we are cancelling the event above, use the callback to re-run what the player was trying to do
-        BanFX.affect(player, BanEffectType.MINEPLEX_GWEN, () -> {
-            player.performCommand(commandNoSlash);
+        BanFX.affect(player, BanFX.getBanEffectManager().getEffect(punishType), () -> {
             BanFX.getPlayerQueue().remove(player);
+            player.performCommand(commandNoSlash);
         });
     }
 }

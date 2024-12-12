@@ -3,3 +3,9 @@ main: dev.wand.banfx.BanFX
 version: ${project.version}
 description: Make banning stylish!
 api-version: 1.13
+author: Wand
+
+commands:
+  banfx:
+    usage: /<command>
+    description: BanFX command

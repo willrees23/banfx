@@ -1,9 +1,11 @@
 package dev.wand.banfx;
 
+import dev.wand.banfx.command.MainCommand;
 import dev.wand.banfx.effectors.BanEffectorV1_8;
 import dev.wand.banfx.event.CommandEvent;
 import dev.wand.banfx.effectors.BanEffectorV1_21;
 import dev.wand.banfx.event.MoveEvent;
+import dev.wand.banfx.manager.BanEffectManager;
 import lombok.Getter;
 import net.insprill.spigotutils.MinecraftVersion;
 import org.bukkit.Bukkit;
@@ -21,6 +23,8 @@ public class BanFX extends JavaPlugin {
     private static BanFX instance;
     @Getter
     private static final ArrayList<Player> playerQueue = new ArrayList<>();
+    @Getter
+    private static final BanEffectManager banEffectManager = new BanEffectManager();
 
     @Override
     public void onEnable() {
@@ -42,6 +46,9 @@ public class BanFX extends JavaPlugin {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new CommandEvent(), this);
         pm.registerEvents(new MoveEvent(), this);
+
+        getLogger().info("Registering commands...");
+        getCommand("banfx").setExecutor(new MainCommand());
 
         getLogger().info("Loading configuration file...");
 
