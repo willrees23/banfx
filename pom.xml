@@ -12,6 +12,8 @@
         <module>banfx-common</module>
         <module>banfx-v1_13</module>
         <module>banfx-plugin</module>
+        <module>banfx-v1_21</module>
+        <module>banfx-v1_8</module>
     </modules>
 
     <properties>
