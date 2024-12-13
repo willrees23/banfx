@@ -8,7 +8,7 @@ public interface BanEffector {
     default void applyEffect(JavaPlugin plugin, Location location, BanEffectType type, Runnable callback) {
         switch (type) {
             case ZEUS -> {
-                location.getWorld().strikeLightning(location);
+                location.getWorld().strikeLightningEffect(location);
                 callback.run();
             }
             default -> {

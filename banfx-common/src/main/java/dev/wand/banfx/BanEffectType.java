@@ -3,7 +3,9 @@ package dev.wand.banfx;
 public enum BanEffectType {
 
     ZEUS,
-    MINEPLEX_GWEN;
+    MINEPLEX_GWEN,
+    CUSTOM
+    ;
 
     public String getDisplayName() {
         return switch (this) {
