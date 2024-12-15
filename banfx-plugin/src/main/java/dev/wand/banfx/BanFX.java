@@ -1,7 +1,7 @@
 package dev.wand.banfx;
 
 import dev.wand.banfx.command.MainCommand;
-import dev.wand.banfx.effectors.BanEffectorV1_21;
+import dev.wand.banfx.effectors.BanEffectorV1_18;
 import dev.wand.banfx.effectors.BanEffectorV1_8;
 import dev.wand.banfx.event.CommandEvent;
 import dev.wand.banfx.event.MoveEvent;
@@ -37,7 +37,7 @@ public class BanFX extends JavaPlugin {
 
         getLogger().info("Detected version: " + MinecraftVersion.getCurrentVersion().getDisplayName());
         if (MinecraftVersion.isMajor(MinecraftVersion.v1_21_0)) {
-            banEffector = new BanEffectorV1_21();
+            banEffector = new BanEffectorV1_18();
         } else if (MinecraftVersion.isMajor(MinecraftVersion.v1_8_0)) {
             banEffector = new BanEffectorV1_8();
         } else {

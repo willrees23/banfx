@@ -2,6 +2,7 @@ package dev.wand.banfx.effectors;
 
 import dev.wand.banfx.BanEffectType;
 import dev.wand.banfx.BanEffector;
+import net.insprill.spigotutils.MinecraftVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class BanEffectorV1_21 implements BanEffector {
+public class BanEffectorV1_18 implements BanEffector {
     @Override
     public void applyEffect(JavaPlugin plugin, Location location, BanEffectType type, Runnable callback) {
         if (Objects.requireNonNull(type) == BanEffectType.MINEPLEX_GWEN) {
@@ -83,7 +84,8 @@ public class BanEffectorV1_21 implements BanEffector {
                         }
                         armorStand.remove();
 
-                        location.getWorld().spawnParticle(Particle.EXPLOSION_EMITTER, location, 1);
+                        Particle particle = MinecraftVersion.isAtLeast(MinecraftVersion.v1_21_0) ? Particle.valueOf("EXPLOSION_EMITTER") : Particle.EXPLOSION_LARGE;
+                        location.getWorld().spawnParticle(particle, location, 1);
                         location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f);
 
                         callback.run();
