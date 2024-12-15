@@ -4,8 +4,7 @@ public enum BanEffectType {
 
     ZEUS,
     MINEPLEX_GWEN,
-    CUSTOM
-    ;
+    CUSTOM;
 
     public String getDisplayName() {
         return switch (this) {

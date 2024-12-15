@@ -1,6 +1,5 @@
 package dev.wand.banfx.event;
 
-import dev.wand.banfx.BanEffectType;
 import dev.wand.banfx.BanFX;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

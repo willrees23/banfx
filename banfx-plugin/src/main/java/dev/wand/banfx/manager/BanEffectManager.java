@@ -10,7 +10,7 @@ public class BanEffectManager {
     // store using a map, key is the punish type, value is the effect type
     private final Map<String, BanEffectType> effects = new HashMap<>();
 
-//    different punishments can ha ve different effects
+    //    different punishments can ha ve different effects
     public void loadFromConfig() {
         // todo: implement
         // load effects from config

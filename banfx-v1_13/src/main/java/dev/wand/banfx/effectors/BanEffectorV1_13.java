@@ -51,10 +51,10 @@ public class BanEffectorV1_13 implements BanEffector {
 
             // Start circling behavior
             new BukkitRunnable() {
+                final int duration = 5 * 20; // Duration in ticks (6 seconds * 20 ticks per second)
                 double angle = 0.0; // Current angle in radians
                 double speed = Math.toRadians(1); // Initial rotation speed (radians per tick)
                 int ticks = 0; // Counter to track elapsed ticks
-                int duration = 5 * 20; // Duration in ticks (6 seconds * 20 ticks per second)
 
                 @Override
                 public void run() {
