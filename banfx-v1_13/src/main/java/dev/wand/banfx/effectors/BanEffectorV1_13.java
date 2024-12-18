@@ -2,10 +2,7 @@ package dev.wand.banfx.effectors;
 
 import dev.wand.banfx.BanEffectType;
 import dev.wand.banfx.BanEffector;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Guardian;
@@ -76,7 +73,7 @@ public class BanEffectorV1_13 implements BanEffector {
                     // Stop the task after the specified duration
                     if (ticks >= duration) {
                         this.cancel();
-                        Bukkit.broadcastMessage("GWEN effect has ended!");
+
                         // despawn enttiies
                         for (Guardian guardian : guardians) {
                             guardian.remove();
@@ -90,6 +87,10 @@ public class BanEffectorV1_13 implements BanEffector {
                     }
                 }
             }.runTaskTimer(plugin, 0L, 1L); // Run every tick (1L = 1 tick)
+        }else if (type == BanEffectType.BLOOD) {
+            location.getWorld().spawnParticle(Particle.BLOCK_CRACK, location, 80, Material.REDSTONE_BLOCK.createBlockData());
+
+            callback.run();
         } else {
             BanEffector.super.applyEffect(plugin, location, type, callback);
         }

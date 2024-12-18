@@ -3,10 +3,7 @@ package dev.wand.banfx.effectors;
 import dev.wand.banfx.BanEffectType;
 import dev.wand.banfx.BanEffector;
 import net.insprill.spigotutils.MinecraftVersion;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.LivingEntity;
@@ -92,8 +89,11 @@ public class BanEffectorV1_18 implements BanEffector {
                     }
                 }
             }.runTaskTimer(plugin, 0L, 1L); // Run every tick (1L = 1 tick)
+        } else if (type == BanEffectType.BLOOD) {
+            location.getWorld().spawnParticle(Particle.BLOCK_CRACK, location, 80, Material.REDSTONE_BLOCK.createBlockData());
+
+            callback.run();
         } else {
-            // not version specific, use default implementation
             BanEffector.super.applyEffect(plugin, location, type, callback);
         }
     }

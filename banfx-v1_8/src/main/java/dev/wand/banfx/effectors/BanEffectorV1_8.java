@@ -2,10 +2,7 @@ package dev.wand.banfx.effectors;
 
 import dev.wand.banfx.BanEffectType;
 import dev.wand.banfx.BanEffector;
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Guardian;
@@ -20,7 +17,7 @@ import java.util.Objects;
 public class BanEffectorV1_8 implements BanEffector {
     @Override
     public void applyEffect(JavaPlugin plugin, Location location, BanEffectType type, Runnable callback) {
-        if (Objects.requireNonNull(type) == BanEffectType.MINEPLEX_GWEN) {
+        if (type == BanEffectType.MINEPLEX_GWEN) {
             double radius = 3.0; // Distance from the player
             double height = 5.0; // Height above the player
             List<Guardian> guardians = new ArrayList<>();
@@ -72,7 +69,7 @@ public class BanEffectorV1_8 implements BanEffector {
                     // Stop the task after the specified duration
                     if (ticks >= duration) {
                         this.cancel();
-                        Bukkit.broadcastMessage("GWEN effect has ended!");
+
                         // despawn enttiies
                         for (Guardian guardian : guardians) {
                             guardian.remove();
@@ -96,7 +93,16 @@ public class BanEffectorV1_8 implements BanEffector {
                     return new Location(location.getWorld(), x, y, z);
                 }
             }.runTaskTimer(plugin, 0L, 1L); // Run every tick (1L = 1 tick)
-        } else {
+        } else if (type == BanEffectType.BLOOD) {
+            // in future versions, we do this:
+            // #getWorld#spawnParticle(Particle.BLOCK_CRACK, location, 80, Material.REDSTONE_BLOCK.createBlockData());
+            // but that doesn't exist in 1.8, so we'll just use playEffect
+            int id = Material.REDSTONE_BLOCK.getId();
+            for (int i = 0; i < 80; i++) {
+                location.getWorld().playEffect(location, Effect.TILE_BREAK, id);
+            }
+        }
+        else {
             // effect isn't version specific, so just use default implementation
             BanEffector.super.applyEffect(plugin, location, type, callback);
         }
