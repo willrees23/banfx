@@ -88,7 +88,7 @@ public class BanEffectorV1_13 implements BanEffector {
                 }
             }.runTaskTimer(plugin, 0L, 1L); // Run every tick (1L = 1 tick)
         }else if (type == BanEffectType.BLOOD) {
-            location.getWorld().spawnParticle(Particle.BLOCK_CRACK, location, 80, Material.REDSTONE_BLOCK.createBlockData());
+            location.getWorld().spawnParticle(Particle.BLOCK_CRACK, location.clone().add(0, 0.5, 0), 80, Material.REDSTONE_BLOCK.createBlockData());
 
             callback.run();
         } else {

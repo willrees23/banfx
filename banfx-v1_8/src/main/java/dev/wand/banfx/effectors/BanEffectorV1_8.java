@@ -99,7 +99,7 @@ public class BanEffectorV1_8 implements BanEffector {
             // but that doesn't exist in 1.8, so we'll just use playEffect
             int id = Material.REDSTONE_BLOCK.getId();
             for (int i = 0; i < 80; i++) {
-                location.getWorld().playEffect(location, Effect.TILE_BREAK, id);
+                location.getWorld().playEffect(location.clone().add(0, 0.5, 0), Effect.TILE_BREAK, id);
             }
         }
         else {
